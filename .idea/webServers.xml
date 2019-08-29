@@ -2,7 +2,7 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="05012969-a9d4-4d18-8e73-c63180c95c44" name="server" url="http://localhost">
+      <webServer id="05012969-a9d4-4d18-8e73-c63180c95c44" name="qa" url="http://localhost/exam">
         <fileTransfer port="0" mountedRoot="C:\xampp\htdocs" accessType="MOUNT" />
       </webServer>
     </option>
