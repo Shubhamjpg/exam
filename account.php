@@ -143,24 +143,51 @@ $sn=@$_GET['n'];
 $total=@$_GET['t'];
 $q=mysqli_query($con,"SELECT * FROM questions WHERE eid='$eid' AND sn='$sn' " );
 echo '<div class="panel" style="margin:5%">';
-while($row=mysqli_fetch_array($q) )
+
+
+while($ro=mysqli_fetch_array($q) )
 {
-$qns=$row['qns'];
-$qid=$row['qid'];
-echo '<b>Question &nbsp;'.$sn.'&nbsp;::<br />'.$qns.'</b><br /><br />';
+$qns=$ro['qns'];
+$qid=$ro['qid'];
+$qu = $ro['type'];
+ echo '<b>Question &nbsp;'.$sn.'&nbsp;::<br />'.$qns.'</b><br /><br />';
 }
+
+
 $q=mysqli_query($con,"SELECT * FROM options WHERE qid='$qid' " );
 echo '<form action="update.php?q=quiz&step=2&eid='.$eid.'&n='.$sn.'&t='.$total.'&qid='.$qid.'" method="POST"  class="form-horizontal">
 <br />';
 
+
 while($row=mysqli_fetch_array($q) )
 {
+
 $option=$row['option'];
 $optionid=$row['optionid'];
-echo'<input type="radio" name="ans" value="'.$optionid.'">'.$option.'<br /><br />';
-}
+ if(empty($qu))
+   echo'<input type="radio" name="ans" value="'.$optionid.'">'.$option.'<br /><br />';
 
-echo'<br /><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;Submit</button></form></div>';
+    elseif ($qu == 'checkbox')
+        echo'<input type="checkbox" name="ans" value="'.$optionid.'">'.$option.'<br /><br />';
+    elseif ($qu == 'textarea')
+    echo'<input type="textarea" name= "ans" value="'.$optionid.'">'.$option.'<br  /><br />';
+ elseif ($qu == 'file')
+     echo'<input type="file" name="pic" accept="image/*">'.$option.'<br  /><br />';
+   /* switch($qu) {
+        case "checkbox":
+            echo '<input type="checkbox" name="ans" value="' . $optionid . '">' . $option . '<br /><br />';
+            break;
+        default:
+            echo '<input type="radio" name="ans" value="' . $optionid . '">' . $option . '<br /><br />';
+            break;
+    }*/
+//echo'<input type="radio" name="ans" value="'.$optionid.'">'.$option.'<br /><br />';
+
+}
+/*    echo  '<input type="reset" value="Clear">';*/
+
+echo'<button type="reset" class="btn btn-primary"><span aria-hidden="true"></span>&nbsp;Clear</button>';
+echo'<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span>&nbsp;Submit</button></form></div>';
 //header("location:dash.php?q=4&step=2&eid=$id&n=$total");
 }
 //result display

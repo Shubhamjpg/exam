@@ -50,6 +50,7 @@ $wrong = $_POST['wrong'];
 $time = $_POST['time'];
 $tag = $_POST['tag'];
 $desc = $_POST['desc'];
+//$id='5589741f9ed52';
 $id=uniqid();
 $q3=mysqli_query($con,"INSERT INTO quiz VALUES  ('$id','$name' , '$sahi' , '$wrong','$total','$time' ,'$desc','$tag', NOW())");
 
@@ -116,6 +117,7 @@ $total=@$_GET['t'];
 $ans=$_POST['ans'];
 $qid=@$_GET['qid'];
 $q=mysqli_query($con,"SELECT * FROM answer WHERE qid='$qid' " );
+
 while($row=mysqli_fetch_array($q) )
 {
 $ansid=$row['ansid'];
@@ -129,6 +131,7 @@ $sahi=$row['sahi'];
 }
 if($sn == 1)
 {
+
 $q=mysqli_query($con,"INSERT INTO history VALUES('$email','$eid' ,'0','0','0','0',NOW())")or die('Error');
 }
 $q=mysqli_query($con,"SELECT * FROM history WHERE eid='$eid' AND email='$email' ")or die('Error115');
@@ -220,6 +223,8 @@ $sun=$sun-$s;
 $q=mysqli_query($con,"UPDATE `rank` SET `score`=$sun ,time=NOW() WHERE email= '$email'")or die('Error174');
 header("location:account.php?q=quiz&step=2&eid=$eid&n=1&t=$t");
 }
+
+
 
 ?>
 
