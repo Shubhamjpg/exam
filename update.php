@@ -116,10 +116,18 @@ $sn=@$_GET['n'];
 $total=@$_GET['t'];
 $ans=$_POST['ans'];
 $qid=@$_GET['qid'];
+
 $q=mysqli_query($con,"SELECT * FROM answer WHERE qid='$qid' " );
+$q4="INSERT INTO `user_record` (qid)VALUES ($qid)";
+    if(mysqli_query($con, $q4)){
+        echo "Records added successfully.";
+    } else{
+        echo "ERROR: Could not able to execute.";
+    }
 
 while($row=mysqli_fetch_array($q) )
 {
+
 $ansid=$row['ansid'];
 }
 if($ans == $ansid)
@@ -133,6 +141,9 @@ if($sn == 1)
 {
 
 $q=mysqli_query($con,"INSERT INTO history VALUES('$email','$eid' ,'0','0','0','0',NOW())")or die('Error');
+
+
+
 }
 $q=mysqli_query($con,"SELECT * FROM history WHERE eid='$eid' AND email='$email' ")or die('Error115');
 
@@ -224,6 +235,9 @@ $q=mysqli_query($con,"UPDATE `rank` SET `score`=$sun ,time=NOW() WHERE email= '$
 header("location:account.php?q=quiz&step=2&eid=$eid&n=1&t=$t");
 }
 
+$q5=mysqli_query($con,"INSERT INTO user_record VALUES( $qid,)")or die('Error165');
+
+//$q4=mysqli_query($con,"INSERT INTO `user_record` (`qid`,`ans_radio`,`ans_subjective`,`type`)VALUES ('0938867763','Male','Rajesh Koothrappali','Woodcrest')";
 
 
 ?>
