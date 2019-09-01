@@ -132,8 +132,8 @@ include_once 'dbConnection.php';
                     }
                 var countdownTimer = setInterval('secondPassed()', 1000);
                 </script>-->
+-->
 
-                <!--home closed-->
 
                 <!--quiz start-->
                 <?php
@@ -153,22 +153,21 @@ include_once 'dbConnection.php';
                         echo '<b>Question &nbsp;'.$sn.'&nbsp;::<br />'.$qns.'</b><br /><br />';
                     }
 
-
                     $q=mysqli_query($con,"SELECT * FROM options WHERE qid='$qid' " );
-                    echo '<form action="update.php?q=quiz&step=2&eid='.$eid.'&n='.$sn.'&t='.$total.'&qid='.$qid.'&type='.$type.'" method="POST"  class="form-horizontal"><br />';
+                    echo '<form action="update.php?q=quiz&step=2&eid='.$eid.'&n='.$sn.'&t='.$total.'&qid='.$qid.'&type='.$type.'" method="POST" enctype="multipart/form-data"  class="form-horizontal"><br />';
                     while($row=mysqli_fetch_array($q) )
                     {
                         $option=$row['option'];
                         $optionid=$row['optionid'];
-                        if(empty($type))
+                        if($type == 'radio')
                             echo'<input type="radio" name="ans" value="'.$optionid.'">'.$option.'<br /><br />';
-
                         elseif ($type == 'checkbox')
-                            echo'<input type="checkbox" name="ans" value="'.$optionid.'">'.$option.'<br /><br />';
-                        elseif ($type == 'textarea')
+                            echo'<input type="checkbox" name="ans[]" value="'.$optionid.'">'.$option.'<br /><br />';
+
+                    elseif ($type == 'textarea')
                             echo'<input type="textarea" name= "ans" value="'.$optionid.'">'.$option.'<br  /><br />';
                         elseif ($type == 'file')
-                            echo'<input type="file" name="pic" accept="image/*">'.$option.'<br  /><br />';
+                            echo'<input type="file" name="file" accept="image/*">'.$option.'<br  /><br />';
 
                     }
 
@@ -256,9 +255,6 @@ include_once 'dbConnection.php';
                     }
                     echo '</table></div></div>';}
                 ?>
-
-
-
             </div></div></div></div>
 <!--Footer start-->
 <div class="row footer">

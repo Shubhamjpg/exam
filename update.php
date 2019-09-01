@@ -115,26 +115,48 @@ if(@$_GET['q']== 'quiz' && @$_GET['step']== 2) {
     $eid=@$_GET['eid'];
     $sn=@$_GET['n'];
     $total=@$_GET['t'];
-    $ans=$_POST['ans'];
     $qid=@$_GET['qid'];
     $type=@$_GET['type'];
+
+    $ans=$_POST['ans'];
+    //$ans=$_POST['pic'];
+
+
+    $file = $_FILES['file'];
+    $file = $_FILES['file']['temp_name'];
+    $file = $_FILES['file']['name'];
+
+    $tempname = $file["temp_name"];
+    $file_store = "student/".$file;
+    move_uploaded_file($tempname,$file_store);
+
 
 
     $q=mysqli_query($con,"SELECT * FROM answer WHERE qid='$qid' " );
 
     //$qans=mysqli_query($con,"INSERT INTO user_record VALUES  ('$userId','$qid', '$ans')");
 
-    if(empty($type))
+    if($type == 'radio') {
+         $query = "INSERT INTO `user_record` (`userId`,`qid`, `ans`,`ans_radio`,`type`) VALUES('$userId','$qid','$ans','$ans','$type')";
+    }
 
-        $query="INSERT INTO `user_record` (`userId`,`qid`, `ans`,`ans_radio`) VALUES('$userId','$qid','$ans','$ans')";
-      elseif ($type == 'checkbox')
-        $query="INSERT INTO `user_record` (`userId`,`qid`, `ans`,`ans_checkbox`) VALUES('$userId','$qid','$ans','$ans')";
-      elseif ($type == 'textarea')
-        $query="INSERT INTO `user_record` (`userId`,`qid`, `ans`,`ans_subjective`) VALUES('$userId','$qid','$ans','$ans')";
-     elseif ($type == 'file')
-        $query="INSERT INTO `user_record` (`userId`,`qid`, `ans`,`file`) VALUES('$userId','$qid','$ans','$ans')";
+    elseif($type == 'checkbox'){
+        foreach ($ans as $value) {
 
-    $q=mysqli_query($con,$query);
+            $query = "INSERT INTO `user_record` (`userId`,`qid`, `ans`,`ans_checkbox`,`type`) VALUES('$userId','$qid','$value','$value','$type')";
+            $qa = mysqli_query($con, $query);
+        }
+        }
+
+      elseif ($type == 'textarea'){
+        $query = "INSERT INTO `user_record` (`userId`,`qid`, `ans`,`ans_subjective`,`type`) VALUES('$userId','$qid','$ans','$ans','$type')";
+        $qa = mysqli_query($con, $query);
+        }
+         elseif ($type == 'file'){
+            $query = "INSERT INTO `user_record` (`userId`,`qid`, `ans`,`file`,`type`,) VALUES('$userId','$qid','$file_store','$file_store','$type')";
+         $qa = mysqli_query($con, $query);
+    }
+
 
     while($row=mysqli_fetch_array($q) )
     {
@@ -207,7 +229,7 @@ if(@$_GET['q']== 'quiz' && @$_GET['step']== 2) {
         $rowcount=mysqli_num_rows($q);
         if($rowcount == 0)
         {
-            $query="INSERT INTO `rank` (`email`, `score`, `time`) VALUES('','$email','$s',NOW())";
+            $query="INSERT INTO `rank` (`email`, `score`, `time`) VALUES('$email','$s',NOW())";
             $q2=mysqli_query($con,$query)or die('Error165');
         }
         else
