@@ -122,16 +122,6 @@ if(@$_GET['q']== 'quiz' && @$_GET['step']== 2) {
     //$ans=$_POST['pic'];
 
 
-    $file = $_FILES['file'];
-    $file = $_FILES['file']['temp_name'];
-    $file = $_FILES['file']['name'];
-
-    $tempname = $file["temp_name"];
-    $file_store = "student/".$file;
-    move_uploaded_file($tempname,$file_store);
-
-
-
     $q=mysqli_query($con,"SELECT * FROM answer WHERE qid='$qid' " );
 
     //$qans=mysqli_query($con,"INSERT INTO user_record VALUES  ('$userId','$qid', '$ans')");
@@ -153,8 +143,15 @@ if(@$_GET['q']== 'quiz' && @$_GET['step']== 2) {
         $qa = mysqli_query($con, $query);
         }
          elseif ($type == 'file'){
-            $query = "INSERT INTO `user_record` (`userId`,`qid`, `ans`,`file`,`type`,) VALUES('$userId','$qid','$file_store','$file_store','$type')";
-         $qa = mysqli_query($con, $query);
+
+             $file = $_FILES['file'];
+             $filename = $_FILES['file']['name'];
+             $temp = $_FILES['file']['tmp_name'];
+
+             $file_store = "student/".$filename;
+             move_uploaded_file($temp,$file_store);
+             $query = "INSERT INTO `user_record` (`userId`,`qid`, `ans`,`file`,`type`) VALUES('$userId','$qid','$file_store','$file_store','$type')";
+             $qa = mysqli_query($con, $query);
     }
 
 
