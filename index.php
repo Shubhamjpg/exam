@@ -93,7 +93,7 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
 <div class="form-group">
   <label class="col-md-12 control-label" for="name"></label>  
   <div class="col-md-12">
-  <input id="name" name="name" placeholder="Enter your name" class="form-control input-md" type="text">
+  <input id="name" name="name" placeholder="ENTER YOUR NAME" class="form-control input-md" type="text">
     
   </div>
 </div>
@@ -102,7 +102,7 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
 <div class="form-group">
   <label class="col-md-12 control-label" for="gender"></label>
   <div class="col-md-12">
-    <select id="gender" name="gender" placeholder="Enter your gender" class="form-control input-md" >
+    <select id="gender" name="gender" placeholder="SELECT GENDER" class="form-control input-md" >
    <option value="Male">Select Gender</option>
   <option value="M">Male</option>
   <option value="F">Female</option> </select>
@@ -132,7 +132,7 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
 <div class="form-group">
   <label class="col-md-12 control-label" for="mob"></label>  
   <div class="col-md-12">
-  <input id="mob" name="mob" placeholder="Enter your mobile number" class="form-control input-md" type="number">
+  <input id="mob" name="mob" placeholder="ENTER YOUR CONTACT NUMBER" class="form-control input-md" type="number">
     
   </div>
 </div>
@@ -176,7 +176,7 @@ var b = document.forms["form"]["cpassword"].value;if (a!=b){alert("Passwords mus
 <a href="" target="_blank">About us</a>
 </div>
 <div class="col-md-3 box">
-<a href="#" data-toggle="modal" data-target="#login">Admin Login</a></div>
+<a href="#" data-toggle="modal" data-target="#login">ADMIN LOGIN</a></div>
 <div class="col-md-3 box">
 <a href="#" data-toggle="modal" data-target="#developers"></a>
 </div>
