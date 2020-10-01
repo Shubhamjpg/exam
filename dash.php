@@ -14,6 +14,9 @@
  	<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
 
 <script>
+	function myFunction() {
+  alert("Hello! I am an alert box!");
+}
 $(function () {
     $(document).on( 'scroll', function(){
         console.log('scroll top : ' + $(window).scrollTop());
@@ -27,7 +30,9 @@ $(function () {
              $(".navbar").removeClass("navbar-fixed-top");
         }
     });
-});</script>
+});
+	
+	</script>
 </head>
 
 <body  style="background:#eee;">
@@ -190,7 +195,7 @@ while($row = mysqli_fetch_array($result)) {
 	 echo '<tr><td>'.$c++.'</td>';
 	echo '<td><a title="Click to open feedback" href="dash.php?q=3&fid='.$id.'">'.$subject.'</a></td><td>'.$email.'</td><td>'.$date.'</td><td>'.$time.'</td><td>'.$name.'</td>
 	<td><a title="Open Feedback" href="dash.php?q=3&fid='.$id.'"><b><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></b></a></td>';
-	echo '<td><a title="Delete Feedback" href="update.php?fdid='.$id.'"><b><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></b></a></td>
+	echo '<td><a title="Delete Feedback for that " href="update.php?fdid='.$id.'"><b><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></b></a></td>
 
 	</tr>';
 }
@@ -374,7 +379,7 @@ echo '<b>Question number&nbsp;'.$i.'&nbsp;:</><br /><!-- Text input-->
 echo '<div class="form-group">
   <label class="col-md-12 control-label" for=""></label>
   <div class="col-md-12"> 
-    <input  type="submit" style="margin-left:45%" class="btn btn-primary" value="Submit" class="btn btn-primary"/>
+    <input  type="submit" style="margin-left:50%" class="btn btn-primary" value="Submit" class="btn btn-danger"/>
   </div>
 </div>
 
@@ -406,8 +411,11 @@ $c=0;
 echo '</table></div></div>';
 
 }
+	echo "hello";
 ?>
+<p>Click the button to display an alert box.</p>
 
+<button onclick="myFunction()">Try it</button>
 
 </div><!--container closed-->
 </div></div>
