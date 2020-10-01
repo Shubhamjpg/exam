@@ -21,6 +21,9 @@ while($row = mysqli_fetch_array($result)) {
 }
 $_SESSION["name"] = $name;
 $_SESSION["email"] = $email;
+$userId = mysqli_query($con,"SELECT * FROM `user` WHERE email ='$email'");
+$userId = mysqli_fetch_array($userId);
+$_SESSION["userId"] = $userId["userId"];
 header("location:account.php?q=1");
 }
 else

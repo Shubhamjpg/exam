@@ -1,6 +1,6 @@
 <?php
 include_once 'dbConnection.php';
-ob_start();
+session_start();
 $name = $_POST['name'];
 $name= ucwords(strtolower($name));
 $gender = $_POST['gender'];
@@ -23,8 +23,11 @@ $mob = addslashes($mob);
 $password = stripslashes($password);
 $password = addslashes($password);
 $password = md5($password);
+$userid = '';
 
-$q3=mysqli_query($con,"INSERT INTO user VALUES  ('$name' , '$gender' , '$college','$email' ,'$mob', '$password')");
+
+$q3=mysqli_query($con,"INSERT INTO user VALUES  ('$userid','$name' , '$gender' , '$college','$email' ,'$mob', '$password')");
+
 if($q3)
 {
 session_start();
@@ -37,5 +40,5 @@ else
 {
 header("location:index.php?q7=Email Already Registered!!!");
 }
-ob_end_flush();
+session_destroy();
 ?>
